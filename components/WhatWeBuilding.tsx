@@ -39,18 +39,26 @@ export default function WhatWeBuilding() {
   const marqueeItems = [...stats, ...stats, ...stats, ...stats, ...stats, ...stats];
 
   return (
-    <section ref={sectionRef} className="relative bg-black overflow-hidden">
+    <section ref={sectionRef} className="relative overflow-hidden">
+
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/wwb-bg.png')" }}
+      />
+      {/* Dark overlay — preserves atmosphere, keeps text legible */}
+      <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.62)" }} />
 
       {/* NOOR FC watermark — fade-in + zoom on scroll entry */}
       <div
         className="absolute top-0 inset-x-0 pointer-events-none select-none flex justify-center"
-        style={{ zIndex: 0 }}
+        style={{ zIndex: 1 }}
       >
         <span
           className="font-display font-bold uppercase whitespace-nowrap leading-[0.85]"
           style={{
             fontSize: "20vw",
-            color: "#1e1e1e",
+            color: "rgba(255,255,255,0.05)",
             letterSpacing: "-0.02em",
             opacity: inView ? undefined : 0,
             animation: inView
