@@ -16,26 +16,47 @@ function ShieldIcon() {
 }
 
 export default function WhatWeBuilding() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef  = useRef<HTMLElement>(null);
+  const watermarkRef = useRef<HTMLSpanElement>(null);
   const [inView, setInView] = useState(false);
 
+  // IntersectionObserver — fires the headline / paragraph slide-ups once
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          obs.disconnect();
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect(); } },
       { threshold: 0.12 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
-  // 6 repetitions for a dense, seamless marquee loop
+  // Scroll-driven parallax — watermark translates right→left as section passes viewport
+  useEffect(() => {
+    const handleScroll = () => {
+      const section  = sectionRef.current;
+      const span     = watermarkRef.current;
+      if (!section || !span) return;
+
+      const rect = section.getBoundingClientRect();
+      const vh   = window.innerHeight;
+      const sh   = section.offsetHeight;
+
+      // 0 = section entering at viewport bottom, 1 = section leaving at viewport top
+      const raw     = (vh - rect.top) / (vh + sh);
+      const clamped = Math.max(0, Math.min(1, raw));
+
+      // Map 0→1 to +20vw→-20vw  (40vw total travel)
+      const vw = window.innerWidth / 100;
+      span.style.transform = `translateX(${(0.5 - clamped) * 40 * vw}px)`;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // set initial position before first scroll
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const marqueeItems = [...stats, ...stats, ...stats, ...stats, ...stats, ...stats];
 
   return (
@@ -46,24 +67,21 @@ export default function WhatWeBuilding() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/wwb-bg.png')" }}
       />
-      {/* Dark overlay — preserves atmosphere, keeps text legible */}
       <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.62)" }} />
 
-      {/* NOOR FC watermark — fade-in + zoom on scroll entry */}
+      {/* NOOR FC watermark — scroll-parallax, no entrance animation */}
       <div
         className="absolute top-0 inset-x-0 pointer-events-none select-none flex justify-center"
         style={{ zIndex: 1 }}
       >
         <span
+          ref={watermarkRef}
           className="font-display font-bold uppercase whitespace-nowrap leading-[0.85]"
           style={{
             fontSize: "20vw",
             color: "rgba(255,255,255,0.05)",
             letterSpacing: "-0.02em",
-            opacity: inView ? undefined : 0,
-            animation: inView
-              ? "watermark-reveal 1.6s cubic-bezier(0.16,1,0.3,1) 0.05s both"
-              : "none",
+            willChange: "transform",
           }}
         >
           NOOR FC
@@ -75,7 +93,7 @@ export default function WhatWeBuilding() {
         className="relative flex items-stretch"
         style={{ minHeight: "90vh", zIndex: 10 }}
       >
-        {/* Left: headline — slide up on entry */}
+        {/* Left: headline — slide up on inView */}
         <div
           className="flex flex-col justify-center shrink-0"
           style={{ width: "34%", paddingLeft: "120px" }}
@@ -96,63 +114,37 @@ export default function WhatWeBuilding() {
           </h2>
         </div>
 
-        {/* Center: player photo — bottom-anchored */}
+        {/* Center: player photo */}
         <div className="flex-1 relative flex items-end justify-center" style={{ zIndex: 20 }}>
           <img
             src="/player.png"
             alt="Noor FC player"
             className="w-auto object-contain object-bottom"
-            style={{
-              height: "85vh",
-              filter: "drop-shadow(-30px 0 50px rgba(0,0,0,1))",
-            }}
+            style={{ height: "85vh", filter: "drop-shadow(-30px 0 50px rgba(0,0,0,1))" }}
           />
         </div>
 
         {/* Right: body text — staggered slide up */}
         <div
           className="flex flex-col justify-center gap-5 shrink-0"
-          style={{
-            width: "32%",
-            paddingRight: "120px",
-            paddingLeft: "36px",
-            zIndex: 10,
-          }}
+          style={{ width: "32%", paddingRight: "120px", paddingLeft: "36px", zIndex: 10 }}
         >
-          <p
-            className="text-white text-[0.875rem] leading-relaxed font-body"
-            style={{
-              opacity: inView ? undefined : 0,
-              animation: inView ? "fade-up 0.9s ease-out 0.5s both" : "none",
-            }}
-          >
-            Noor FC is a football club for young people who would otherwise be
-            priced out, overlooked, or simply never asked.
-          </p>
-          <p
-            className="text-white/70 text-[0.875rem] leading-relaxed font-body"
-            style={{
-              opacity: inView ? undefined : 0,
-              animation: inView ? "fade-up 0.9s ease-out 0.65s both" : "none",
-            }}
-          >
-            We&rsquo;re open to kids from Noor Homes and kids from the
-            surrounding streets &mdash; most from less privileged backgrounds
-            &mdash; and there&rsquo;s no barrier over money, kit, or ability. We
-            run four levels so every player gets a proper game at their own
-            pace, build life skills into the way every session runs, and bring
-            local clubs and the professional game alongside our players.
-          </p>
-          <p
-            className="text-white/70 text-[0.875rem] leading-relaxed font-body"
-            style={{
-              opacity: inView ? undefined : 0,
-              animation: inView ? "fade-up 0.9s ease-out 0.8s both" : "none",
-            }}
-          >
-            This is not a profit-making venture. It&rsquo;s a community being
-            built, and football is how we do it.
-          </p>
+          {[
+            { text: "Noor FC is a football club for young people who would otherwise be priced out, overlooked, or simply never asked.", delay: "0.5s", dim: false },
+            { text: "We’re open to kids from Noor Homes and kids from the surrounding streets — most from less privileged backgrounds — and there’s no barrier over money, kit, or ability. We run four levels so every player gets a proper game at their own pace, build life skills into the way every session runs, and bring local clubs and the professional game alongside our players.", delay: "0.65s", dim: true },
+            { text: "This is not a profit-making venture. It’s a community being built, and football is how we do it.", delay: "0.8s", dim: true },
+          ].map(({ text, delay, dim }) => (
+            <p
+              key={delay}
+              className={`text-[0.875rem] leading-relaxed font-body ${dim ? "text-white/70" : "text-white"}`}
+              style={{
+                opacity: inView ? undefined : 0,
+                animation: inView ? `fade-up 0.9s ease-out ${delay} both` : "none",
+              }}
+            >
+              {text}
+            </p>
+          ))}
         </div>
       </div>
 
@@ -163,30 +155,18 @@ export default function WhatWeBuilding() {
           bottom: "100px",
           backgroundColor: "#1d6b35",
           zIndex: 30,
-          maskImage:
-            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+          maskImage: "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+          WebkitMaskImage: "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
         }}
       >
         <div
           className="flex items-center py-4"
-          style={{
-            width: "max-content",
-            animation: "marquee 28s linear infinite",
-          }}
+          style={{ width: "max-content", animation: "marquee 28s linear infinite" }}
         >
           {marqueeItems.map((stat, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-3 shrink-0"
-              style={{ paddingLeft: "56px", paddingRight: "56px" }}
-            >
+            <div key={i} className="flex items-center gap-3 shrink-0" style={{ paddingLeft: "56px", paddingRight: "56px" }}>
               <ShieldIcon />
-              <span
-                className="font-display font-bold uppercase text-white whitespace-nowrap"
-                style={{ fontSize: "0.9rem", letterSpacing: "0.12em" }}
-              >
+              <span className="font-display font-bold uppercase text-white whitespace-nowrap" style={{ fontSize: "0.9rem", letterSpacing: "0.12em" }}>
                 {stat}
               </span>
             </div>
