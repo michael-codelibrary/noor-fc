@@ -50,10 +50,10 @@ function StarIcon() {
 }
 
 const levels = [
-  { name: "FIRST TOUCH",     desc: "Never played, or not for years",      color: "#484848", Icon: TouchIcon  },
-  { name: "DEVELOPMENT",     desc: "Plays a bit, wants to get better",    color: "#2e2e2e", Icon: ArrowIcon  },
-  { name: "MATCH SQUAD",     desc: "Competitive league football",          color: "#1a1a1a", Icon: ShieldIcon },
-  { name: "WHISTLE & BADGE", desc: "Coach or referee instead of playing", color: "#0a0a0a", Icon: StarIcon   },
+  { name: "FIRST TOUCH",     desc: "Never played, or not for years",      color: "#484848", Icon: TouchIcon,  bg: "/col-1.png" },
+  { name: "DEVELOPMENT",     desc: "Plays a bit, wants to get better",    color: "#2e2e2e", Icon: ArrowIcon,  bg: null         },
+  { name: "MATCH SQUAD",     desc: "Competitive league football",          color: "#1a1a1a", Icon: ShieldIcon, bg: null         },
+  { name: "WHISTLE & BADGE", desc: "Coach or referee instead of playing", color: "#0a0a0a", Icon: StarIcon,   bg: null         },
 ];
 
 export default function Levels() {
@@ -77,10 +77,14 @@ export default function Levels() {
 
       {/* Four band columns — each a full-height container */}
       <div className="absolute inset-0 flex" style={{ zIndex: 0 }}>
-        {levels.map(({ color, name, desc, Icon }, i) => {
+        {levels.map(({ color, name, desc, Icon, bg }, i) => {
           const isActive    = hoveredIndex === i;
           const isCollapsed = hoveredIndex !== null && !isActive;
           const bandWidth   = hoveredIndex === null ? "25%" : isActive ? "70%" : "10%";
+
+          const bgImage = bg
+            ? `linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 60%, rgba(0,0,0,0.1) 100%), url('${bg}')`
+            : undefined;
 
           return (
             <div
@@ -90,6 +94,9 @@ export default function Levels() {
                 width: bandWidth,
                 flexShrink: 0,
                 backgroundColor: color,
+                backgroundImage: bgImage,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
                 transition: "width 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                 paddingBottom: "52px",
                 paddingLeft:  i === 0 ? "120px" : "28px",
