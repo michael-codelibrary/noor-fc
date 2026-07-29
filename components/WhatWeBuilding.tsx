@@ -40,7 +40,7 @@ export default function WhatWeBuilding() {
       {/* Main three-column content */}
       <div
         className="relative flex items-stretch"
-        style={{ minHeight: "560px", zIndex: 10 }}
+        style={{ minHeight: "90vh", zIndex: 10 }}
       >
         {/* Left: stacked headline, anchored to bottom */}
         <div
@@ -67,7 +67,7 @@ export default function WhatWeBuilding() {
             alt="Noor FC player"
             className="w-auto object-contain object-bottom"
             style={{
-              height: "540px",
+              height: "85vh",
               filter: "drop-shadow(-30px 0 50px rgba(0,0,0,1))",
             }}
           />
