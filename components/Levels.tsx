@@ -50,10 +50,10 @@ function StarIcon() {
 }
 
 const levels = [
-  { name: "FIRST TOUCH",     desc: "Never played, or not for years",      color: "#484848", Icon: TouchIcon,  bg: "/col-1.png" },
-  { name: "DEVELOPMENT",     desc: "Plays a bit, wants to get better",    color: "#2e2e2e", Icon: ArrowIcon,  bg: null         },
-  { name: "MATCH SQUAD",     desc: "Competitive league football",          color: "#1a1a1a", Icon: ShieldIcon, bg: null         },
-  { name: "WHISTLE & BADGE", desc: "Coach or referee instead of playing", color: "#0a0a0a", Icon: StarIcon,   bg: null         },
+  { name: "FIRST TOUCH",     desc: "Never played, or not for years",      color: "#484848", Icon: TouchIcon,  bg: "/col-1.png", bgPos: "left center" },
+  { name: "DEVELOPMENT",     desc: "Plays a bit, wants to get better",    color: "#2e2e2e", Icon: ArrowIcon,  bg: null,         bgPos: "center"      },
+  { name: "MATCH SQUAD",     desc: "Competitive league football",          color: "#1a1a1a", Icon: ShieldIcon, bg: null,         bgPos: "center"      },
+  { name: "WHISTLE & BADGE", desc: "Coach or referee instead of playing", color: "#0a0a0a", Icon: StarIcon,   bg: null,         bgPos: "center"      },
 ];
 
 export default function Levels() {
@@ -77,7 +77,7 @@ export default function Levels() {
 
       {/* Four band columns — each a full-height container */}
       <div className="absolute inset-0 flex" style={{ zIndex: 0 }}>
-        {levels.map(({ color, name, desc, Icon, bg }, i) => {
+        {levels.map(({ color, name, desc, Icon, bg, bgPos }, i) => {
           const isActive    = hoveredIndex === i;
           const isCollapsed = hoveredIndex !== null && !isActive;
           const bandWidth   = hoveredIndex === null ? "25%" : isActive ? "70%" : "10%";
@@ -96,7 +96,7 @@ export default function Levels() {
                 backgroundColor: color,
                 backgroundImage: bgImage,
                 backgroundSize: "cover",
-                backgroundPosition: "center",
+                backgroundPosition: bgPos,
                 transition: "width 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                 paddingBottom: "52px",
                 paddingLeft:  i === 0 ? "120px" : "28px",
