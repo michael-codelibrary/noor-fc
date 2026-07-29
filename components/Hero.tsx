@@ -9,12 +9,11 @@ const subscriptionFeatures = [
 export default function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-zinc-950">
-      {/* Background image — replace URL with your actual photo */}
+      {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1920&q=80')",
+          backgroundImage: "url('/hero-bg.jpg')",
         }}
       />
 
