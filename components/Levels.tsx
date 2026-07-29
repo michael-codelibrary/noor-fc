@@ -167,7 +167,7 @@ export default function Levels() {
                 >
                   <p
                     className="font-body text-white/70 leading-relaxed"
-                    style={{ fontSize: "0.9rem", maxWidth: "320px" }}
+                    style={{ maxWidth: "320px" }}
                   >
                     {para}
                   </p>
