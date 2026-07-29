@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 const stats = ["ONE CLUB", "ONE BADGE", "FOUR LEVELS", "0 BARRIERS"];
 
 function ShieldIcon() {
@@ -12,19 +16,47 @@ function ShieldIcon() {
 }
 
 export default function WhatWeBuilding() {
-  // 6 repetitions — track is 6× one set; translateX(-50%) = 3 sets, always wider than viewport
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // 6 repetitions for a dense, seamless marquee loop
   const marqueeItems = [...stats, ...stats, ...stats, ...stats, ...stats, ...stats];
 
   return (
-    <section className="relative bg-black overflow-hidden">
-      {/* Giant NOOR FC watermark */}
+    <section ref={sectionRef} className="relative bg-black overflow-hidden">
+
+      {/* NOOR FC watermark — fade-in + zoom on scroll entry */}
       <div
         className="absolute top-0 inset-x-0 pointer-events-none select-none flex justify-center"
         style={{ zIndex: 0 }}
       >
         <span
           className="font-display font-bold uppercase whitespace-nowrap leading-[0.85]"
-          style={{ fontSize: "20vw", color: "#1e1e1e", letterSpacing: "-0.02em" }}
+          style={{
+            fontSize: "20vw",
+            color: "#1e1e1e",
+            letterSpacing: "-0.02em",
+            opacity: inView ? undefined : 0,
+            animation: inView
+              ? "watermark-reveal 1.6s cubic-bezier(0.16,1,0.3,1) 0.05s both"
+              : "none",
+          }}
         >
           NOOR FC
         </span>
@@ -35,14 +67,18 @@ export default function WhatWeBuilding() {
         className="relative flex items-stretch"
         style={{ minHeight: "90vh", zIndex: 10 }}
       >
-        {/* Left: headline — vertically centred */}
+        {/* Left: headline — slide up on entry */}
         <div
           className="flex flex-col justify-center shrink-0"
           style={{ width: "34%", paddingLeft: "120px" }}
         >
           <h2
             className="font-display font-bold uppercase text-white leading-[0.88] tracking-tight"
-            style={{ fontSize: "clamp(3rem, 5.5vw, 5.5rem)" }}
+            style={{
+              fontSize: "clamp(3rem, 5.5vw, 5.5rem)",
+              opacity: inView ? undefined : 0,
+              animation: inView ? "fade-up 0.9s ease-out 0.3s both" : "none",
+            }}
           >
             WHAT
             <br />
@@ -65,7 +101,7 @@ export default function WhatWeBuilding() {
           />
         </div>
 
-        {/* Right: body text — vertically centred to match heading */}
+        {/* Right: body text — staggered slide up */}
         <div
           className="flex flex-col justify-center gap-5 shrink-0"
           style={{
@@ -75,11 +111,23 @@ export default function WhatWeBuilding() {
             zIndex: 10,
           }}
         >
-          <p className="text-white text-[0.875rem] leading-relaxed font-body">
+          <p
+            className="text-white text-[0.875rem] leading-relaxed font-body"
+            style={{
+              opacity: inView ? undefined : 0,
+              animation: inView ? "fade-up 0.9s ease-out 0.5s both" : "none",
+            }}
+          >
             Noor FC is a football club for young people who would otherwise be
             priced out, overlooked, or simply never asked.
           </p>
-          <p className="text-white/70 text-[0.875rem] leading-relaxed font-body">
+          <p
+            className="text-white/70 text-[0.875rem] leading-relaxed font-body"
+            style={{
+              opacity: inView ? undefined : 0,
+              animation: inView ? "fade-up 0.9s ease-out 0.65s both" : "none",
+            }}
+          >
             We&rsquo;re open to kids from Noor Homes and kids from the
             surrounding streets &mdash; most from less privileged backgrounds
             &mdash; and there&rsquo;s no barrier over money, kit, or ability. We
@@ -87,18 +135,20 @@ export default function WhatWeBuilding() {
             pace, build life skills into the way every session runs, and bring
             local clubs and the professional game alongside our players.
           </p>
-          <p className="text-white/70 text-[0.875rem] leading-relaxed font-body">
+          <p
+            className="text-white/70 text-[0.875rem] leading-relaxed font-body"
+            style={{
+              opacity: inView ? undefined : 0,
+              animation: inView ? "fade-up 0.9s ease-out 0.8s both" : "none",
+            }}
+          >
             This is not a profit-making venture. It&rsquo;s a community being
             built, and football is how we do it.
           </p>
         </div>
       </div>
 
-      {/*
-        Marquee strip — absolutely positioned 100px from the section bottom,
-        floating over the section content.
-        Edge fade via mask-image softens the left/right entry points.
-      */}
+      {/* Marquee strip — floating 100px from section bottom */}
       <div
         className="absolute left-0 right-0 overflow-hidden"
         style={{
