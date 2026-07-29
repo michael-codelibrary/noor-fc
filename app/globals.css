@@ -18,6 +18,10 @@ body {
   font-family: var(--font-outfit), sans-serif;
 }
 
+p {
+  font-size: 20px;
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
