@@ -6,20 +6,21 @@ export default function Navbar() {
       className="absolute top-0 left-0 right-0 z-50"
       style={{ animation: "fade-down 0.6s ease-out both" }}
     >
-      {/* Soft inverted trapezoid pinned at top center */}
+      {/* Inverted trapezoid — straight sides, rounded bottom corners */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-        <div className="relative" style={{ width: "170px", height: "122px" }}>
-          {/* SVG soft trapezoid shape */}
+        <div className="relative" style={{ width: "200px", height: "112px" }}>
+
+          {/* SVG trapezoid: straight slants, Q-bezier only at the two bottom corners */}
           <svg
-            width="170"
-            height="122"
-            viewBox="0 0 170 122"
+            width="200"
+            height="112"
+            viewBox="0 0 200 112"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            style={{ filter: "drop-shadow(0 6px 20px rgba(0,0,0,0.22))" }}
+            style={{ filter: "drop-shadow(0 5px 18px rgba(0,0,0,0.28))" }}
           >
             <path
-              d="M0,0 H170 C168,32 142,108 122,108 Q85,122 48,108 C28,108 2,32 0,0 Z"
+              d="M0,0 H200 L148,92 Q140,104 128,104 H72 Q60,104 52,92 L0,0 Z"
               fill="white"
             />
           </svg>
@@ -27,7 +28,7 @@ export default function Navbar() {
           {/* Black circular logo — centered in the white area */}
           <div
             className="absolute top-0 left-0 right-0 flex items-center justify-center"
-            style={{ height: "108px" }}
+            style={{ height: "104px" }}
           >
             <div className="w-14 h-14 bg-black rounded-full flex items-center justify-center shadow-md">
               <svg
@@ -71,7 +72,7 @@ export default function Navbar() {
       {/* Transparent nav row */}
       <nav
         className="flex items-center justify-between px-[120px]"
-        style={{ height: "108px" }}
+        style={{ height: "104px" }}
       >
         {/* Left: nav links */}
         <div className="flex items-center gap-0.5">
