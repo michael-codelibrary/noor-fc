@@ -2,16 +2,64 @@
 
 import { useEffect, useRef, useState } from "react";
 
+function TouchIcon() {
+  return (
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <circle cx="17" cy="17" r="13" stroke="white" strokeWidth="1.5" />
+      <line x1="17" y1="4" x2="17" y2="30" stroke="white" strokeWidth="1" strokeLinecap="round" />
+      <line x1="4" y1="17" x2="30" y2="17" stroke="white" strokeWidth="1" strokeLinecap="round" />
+      <circle cx="17" cy="17" r="2.5" fill="white" />
+    </svg>
+  );
+}
+
+function ArrowIcon() {
+  return (
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <path d="M17 28 L17 8" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M11 14 L17 8 L23 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="17" cy="29" r="2" fill="white" />
+    </svg>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <path
+        d="M17 3 L4 8.5 L4 18 C4 24.5 10 29.5 17 32 C24 29.5 30 24.5 30 18 L30 8.5 Z"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <path
+        d="M17 4 L20.5 13.5 L30.5 13.8 L23 19.8 L25.6 29.5 L17 24 L8.4 29.5 L11 19.8 L3.5 13.8 L13.5 13.5 Z"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 const levels = [
-  { name: "FIRST TOUCH",     desc: "Never played, or not for years",      color: "#484848" },
-  { name: "DEVELOPMENT",     desc: "Plays a bit, wants to get better",    color: "#2e2e2e" },
-  { name: "MATCH SQUAD",     desc: "Competitive league football",          color: "#1a1a1a" },
-  { name: "WHISTLE & BADGE", desc: "Coach or referee instead of playing", color: "#0a0a0a" },
+  { name: "FIRST TOUCH",     desc: "Never played, or not for years",      color: "#484848", Icon: TouchIcon  },
+  { name: "DEVELOPMENT",     desc: "Plays a bit, wants to get better",    color: "#2e2e2e", Icon: ArrowIcon  },
+  { name: "MATCH SQUAD",     desc: "Competitive league football",          color: "#1a1a1a", Icon: ShieldIcon },
+  { name: "WHISTLE & BADGE", desc: "Coach or referee instead of playing", color: "#0a0a0a", Icon: StarIcon   },
 ];
 
 export default function Levels() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [inView, setInView] = useState(false);
+  const sectionRef    = useRef<HTMLElement>(null);
+  const [inView, setInView]           = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -27,47 +75,59 @@ export default function Levels() {
   return (
     <section ref={sectionRef} className="relative overflow-hidden" style={{ minHeight: "90vh" }}>
 
-      {/* Four band columns — full-height containers holding the level labels */}
+      {/* Four band columns — each a full-height container */}
       <div className="absolute inset-0 flex" style={{ zIndex: 0 }}>
-        {levels.map(({ color, name, desc }, i) => (
-          <div
-            key={i}
-            className="flex-1 flex flex-col justify-end"
-            style={{
-              backgroundColor: color,
-              paddingBottom: "52px",
-              paddingLeft:  i === 0 ? "120px" : "28px",
-              paddingRight: i === levels.length - 1 ? "120px" : "28px",
-            }}
-          >
+        {levels.map(({ color, name, desc, Icon }, i) => {
+          const isActive    = hoveredIndex === i;
+          const isCollapsed = hoveredIndex !== null && !isActive;
+          const bandWidth   = hoveredIndex === null ? "25%" : isActive ? "70%" : "10%";
+
+          return (
             <div
-              className="font-display font-bold uppercase text-white"
+              key={i}
+              className="flex flex-col justify-end overflow-hidden"
               style={{
-                fontSize: "1rem",
-                letterSpacing: "0.08em",
-                marginBottom: "6px",
-                opacity: inView ? undefined : 0,
-                animation: inView ? `fade-up 0.8s ease-out ${0.45 + i * 0.1}s both` : "none",
+                width: bandWidth,
+                flexShrink: 0,
+                backgroundColor: color,
+                transition: "width 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                paddingBottom: "52px",
+                paddingLeft:  i === 0 ? "120px" : "28px",
+                paddingRight: i === levels.length - 1 ? "120px" : "28px",
+                cursor: "default",
               }}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              {name}
+              <div
+                style={{
+                  opacity: isCollapsed ? 0 : 1,
+                  transition: "opacity 0.25s ease",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <div style={{ marginBottom: "16px" }}>
+                  <Icon />
+                </div>
+                <div
+                  className="font-display font-bold uppercase text-white"
+                  style={{ fontSize: "1rem", letterSpacing: "0.08em", marginBottom: "6px" }}
+                >
+                  {name}
+                </div>
+                <div
+                  className="font-body text-white/55"
+                  style={{ fontSize: "0.875rem", lineHeight: 1.4 }}
+                >
+                  {desc}
+                </div>
+              </div>
             </div>
-            <div
-              className="font-body text-white/55"
-              style={{
-                fontSize: "0.875rem",
-                lineHeight: 1.4,
-                opacity: inView ? undefined : 0,
-                animation: inView ? `fade-up 0.8s ease-out ${0.52 + i * 0.1}s both` : "none",
-              }}
-            >
-              {desc}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      {/* Headline + paragraphs float above the bands */}
+      {/* Headline + paragraphs — float above the bands */}
       <div
         className="relative flex items-start"
         style={{ paddingTop: "96px", paddingLeft: "120px", paddingRight: "120px", zIndex: 10 }}
