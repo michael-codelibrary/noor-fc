@@ -14,8 +14,8 @@ export default function About() {
           right: "-80px",
           top: "50%",
           transform: "translateY(-50%)",
-          width: "700px",
-          height: "700px",
+          width: "900px",
+          height: "900px",
           background:
             "radial-gradient(ellipse at center, rgba(29,107,53,0.18) 0%, transparent 68%)",
         }}
@@ -27,7 +27,7 @@ export default function About() {
         style={{ backgroundColor: "rgba(29,107,53,0.25)" }}
       />
 
-      <div className="flex" style={{ minHeight: "680px" }}>
+      <div className="flex" style={{ minHeight: "90vh" }}>
         {/* ── Left: editorial text ── */}
         <div
           className="relative flex flex-col justify-center py-24 shrink-0 z-10"
@@ -137,7 +137,7 @@ export default function About() {
             alt="Noor FC player in action"
             className="relative"
             style={{
-              height: "640px",
+              height: "88vh",
               width: "auto",
               objectFit: "contain",
               objectPosition: "bottom center",
