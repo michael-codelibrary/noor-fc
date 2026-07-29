@@ -23,8 +23,7 @@ export default function VideoSection() {
 
       {/* Content — top-centred */}
       <div
-        className="relative flex flex-col items-center text-center"
-        className="px-6 sm:px-10 lg:px-[120px]"
+        className="relative flex flex-col items-center text-center px-6 sm:px-10 lg:px-[120px]"
         style={{ minHeight: "90vh", zIndex: 10, paddingTop: "96px" }}
       >
         <h2
