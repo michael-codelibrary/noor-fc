@@ -12,8 +12,8 @@ function ShieldIcon() {
 }
 
 export default function WhatWeBuilding() {
-  // Duplicate stats twice for a seamless 50% translateX loop
-  const marqueeItems = [...stats, ...stats];
+  // 6 repetitions — track is 6× one set; translateX(-50%) = 3 sets, always wider than viewport
+  const marqueeItems = [...stats, ...stats, ...stats, ...stats, ...stats, ...stats];
 
   return (
     <section className="relative bg-black overflow-hidden">
@@ -35,10 +35,10 @@ export default function WhatWeBuilding() {
         className="relative flex items-stretch"
         style={{ minHeight: "90vh", zIndex: 10 }}
       >
-        {/* Left: headline — bottom-aligned, 180px clearance above marquee */}
+        {/* Left: headline — vertically centred */}
         <div
-          className="flex flex-col justify-end shrink-0"
-          style={{ width: "34%", paddingLeft: "120px", paddingBottom: "180px" }}
+          className="flex flex-col justify-center shrink-0"
+          style={{ width: "34%", paddingLeft: "120px" }}
         >
           <h2
             className="font-display font-bold uppercase text-white leading-[0.88] tracking-tight"
@@ -65,14 +65,13 @@ export default function WhatWeBuilding() {
           />
         </div>
 
-        {/* Right: body text — bottom-aligned to match heading */}
+        {/* Right: body text — vertically centred to match heading */}
         <div
-          className="flex flex-col justify-end gap-5 shrink-0"
+          className="flex flex-col justify-center gap-5 shrink-0"
           style={{
             width: "32%",
             paddingRight: "120px",
             paddingLeft: "36px",
-            paddingBottom: "180px",
             zIndex: 10,
           }}
         >
