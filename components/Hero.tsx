@@ -42,7 +42,7 @@ export default function Hero() {
               to play
             </h1>
 
-            <p className="text-white/60 text-sm leading-relaxed max-w-[320px] font-body font-light">
+            <p className="text-white/60 text-base leading-relaxed max-w-[320px] font-body font-light">
               Noor FC is a not-for-profit community football club, open to
               anyone local who wants a game. No trials. No cuts. No cost to
               start.

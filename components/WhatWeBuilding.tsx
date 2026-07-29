@@ -136,7 +136,7 @@ export default function WhatWeBuilding() {
           ].map(({ text, delay, dim }) => (
             <p
               key={delay}
-              className={`text-[0.875rem] leading-relaxed font-body ${dim ? "text-white/70" : "text-white"}`}
+              className={`text-base leading-relaxed font-body ${dim ? "text-white/70" : "text-white"}`}
               style={{
                 opacity: inView ? undefined : 0,
                 animation: inView ? `fade-up 0.9s ease-out ${delay} both` : "none",

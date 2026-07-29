@@ -46,7 +46,7 @@ export default function VideoSection() {
           {paragraphs.map((text, i) => (
             <p
               key={i}
-              className="font-body text-[0.9375rem] leading-relaxed"
+              className="font-body text-base leading-relaxed"
               style={{
                 color: i === 0 ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.65)",
                 textShadow: "0 1px 12px rgba(0,0,0,0.6)",
