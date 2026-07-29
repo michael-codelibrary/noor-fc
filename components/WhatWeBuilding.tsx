@@ -2,13 +2,7 @@ const stats = ["ONE CLUB", "ONE BADGE", "FOUR LEVELS", "0 BARRIERS"];
 
 function ShieldIcon() {
   return (
-    <svg
-      width="22"
-      height="27"
-      viewBox="0 0 22 27"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="18" height="22" viewBox="0 0 22 27" fill="none">
       <path
         d="M11 1L1.5 5V13.5C1.5 20 6 24.5 11 26C16 24.5 20.5 20 20.5 13.5V5L11 1Z"
         fill="white"
@@ -18,20 +12,19 @@ function ShieldIcon() {
 }
 
 export default function WhatWeBuilding() {
+  // Duplicate stats twice for a seamless 50% translateX loop
+  const marqueeItems = [...stats, ...stats];
+
   return (
     <section className="relative bg-black overflow-hidden">
-      {/* Giant NOOR FC watermark — sits behind everything */}
+      {/* Giant NOOR FC watermark */}
       <div
         className="absolute top-0 inset-x-0 pointer-events-none select-none flex justify-center"
         style={{ zIndex: 0 }}
       >
         <span
           className="font-display font-bold uppercase whitespace-nowrap leading-[0.85]"
-          style={{
-            fontSize: "20vw",
-            color: "#1e1e1e",
-            letterSpacing: "-0.02em",
-          }}
+          style={{ fontSize: "20vw", color: "#1e1e1e", letterSpacing: "-0.02em" }}
         >
           NOOR FC
         </span>
@@ -42,10 +35,10 @@ export default function WhatWeBuilding() {
         className="relative flex items-stretch"
         style={{ minHeight: "90vh", zIndex: 10 }}
       >
-        {/* Left: stacked headline, anchored to bottom */}
+        {/* Left: headline — bottom-aligned, 180px clearance above marquee */}
         <div
-          className="flex flex-col justify-end pb-14 shrink-0"
-          style={{ width: "34%", paddingLeft: "120px" }}
+          className="flex flex-col justify-end shrink-0"
+          style={{ width: "34%", paddingLeft: "120px", paddingBottom: "180px" }}
         >
           <h2
             className="font-display font-bold uppercase text-white leading-[0.88] tracking-tight"
@@ -59,9 +52,8 @@ export default function WhatWeBuilding() {
           </h2>
         </div>
 
-        {/* Center: cut-out player photo, anchored to bottom */}
+        {/* Center: player photo — bottom-anchored */}
         <div className="flex-1 relative flex items-end justify-center" style={{ zIndex: 20 }}>
-          {/* Drop /player.png (a cut-out PNG) into public/ to populate this */}
           <img
             src="/player.png"
             alt="Noor FC player"
@@ -73,13 +65,14 @@ export default function WhatWeBuilding() {
           />
         </div>
 
-        {/* Right: body text, vertically centered */}
+        {/* Right: body text — bottom-aligned to match heading */}
         <div
-          className="flex flex-col justify-center gap-5 py-16 shrink-0"
+          className="flex flex-col justify-end gap-5 shrink-0"
           style={{
             width: "32%",
             paddingRight: "120px",
             paddingLeft: "36px",
+            paddingBottom: "180px",
             zIndex: 10,
           }}
         >
@@ -102,22 +95,46 @@ export default function WhatWeBuilding() {
         </div>
       </div>
 
-      {/* Dark green stats bar */}
+      {/*
+        Marquee strip — absolutely positioned 100px from the section bottom,
+        floating over the section content.
+        Edge fade via mask-image softens the left/right entry points.
+      */}
       <div
-        className="relative flex items-center justify-between px-[120px] py-5"
-        style={{ backgroundColor: "#1d6b35", zIndex: 10 }}
+        className="absolute left-0 right-0 overflow-hidden"
+        style={{
+          bottom: "100px",
+          backgroundColor: "#1d6b35",
+          zIndex: 30,
+          maskImage:
+            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+        }}
       >
-        {stats.map((stat) => (
-          <div key={stat} className="flex items-center gap-3">
-            <ShieldIcon />
-            <span
-              className="font-display font-bold uppercase text-white tracking-widest"
-              style={{ fontSize: "1rem", letterSpacing: "0.1em" }}
+        <div
+          className="flex items-center py-4"
+          style={{
+            width: "max-content",
+            animation: "marquee 28s linear infinite",
+          }}
+        >
+          {marqueeItems.map((stat, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-3 shrink-0"
+              style={{ paddingLeft: "56px", paddingRight: "56px" }}
             >
-              {stat}
-            </span>
-          </div>
-        ))}
+              <ShieldIcon />
+              <span
+                className="font-display font-bold uppercase text-white whitespace-nowrap"
+                style={{ fontSize: "0.9rem", letterSpacing: "0.12em" }}
+              >
+                {stat}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
