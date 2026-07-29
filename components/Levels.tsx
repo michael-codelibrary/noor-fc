@@ -129,7 +129,7 @@ export default function Levels() {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               {/* Bottom row: icon+text  ↔  paragraph, bottom-aligned */}
-              <div style={{ display: "flex", flexDirection: rowDir, alignItems: "flex-end", gap: "32px" }}>
+              <div style={{ display: "flex", flexDirection: rowDir, alignItems: "flex-end", justifyContent: "space-between" }}>
 
                 {/* Icon + level text */}
                 <div style={{ flexShrink: 0 }}>
@@ -161,7 +161,6 @@ export default function Levels() {
                 {/* Paragraph — fades in with hover */}
                 <div
                   style={{
-                    flex: 1,
                     opacity: isActive ? 1 : 0,
                     transition: "opacity 0.3s ease 0.05s",
                   }}
