@@ -50,15 +50,35 @@ function StarIcon() {
 }
 
 const levels = [
-  { name: "FIRST TOUCH",     desc: "Never played, or not for years",      color: "#484848", Icon: TouchIcon,  bg: "/col-1.png", bgPos: "left center" },
-  { name: "DEVELOPMENT",     desc: "Plays a bit, wants to get better",    color: "#2e2e2e", Icon: ArrowIcon,  bg: "/col-2.png", bgPos: "calc(35% + 120px) center" },
-  { name: "MATCH SQUAD",     desc: "Competitive league football",          color: "#1a1a1a", Icon: ShieldIcon, bg: "/col-3.png", bgPos: "calc(100% + 370px) center" },
-  { name: "WHISTLE & BADGE", desc: "Coach or referee instead of playing", color: "#0a0a0a", Icon: StarIcon,   bg: "/col-4.png", bgPos: "right center" },
+  {
+    name: "FIRST TOUCH",
+    desc: "Never played, or not for years",
+    para: "No experience needed. Show up once and we'll take care of the rest — there's a place for everyone from the very first session.",
+    color: "#484848", Icon: TouchIcon,  bg: "/col-1.png", bgPos: "left center",
+  },
+  {
+    name: "DEVELOPMENT",
+    desc: "Plays a bit, wants to get better",
+    para: "Regular sessions focused on building real skills. You'll train with coaches and improve week by week in a supportive environment.",
+    color: "#2e2e2e", Icon: ArrowIcon,  bg: "/col-2.png", bgPos: "calc(35% + 120px) center",
+  },
+  {
+    name: "MATCH SQUAD",
+    desc: "Competitive league football",
+    para: "Competitive fixtures every week. Represent the club, play to win, and push your game to the next level alongside serious teammates.",
+    color: "#1a1a1a", Icon: ShieldIcon, bg: "/col-3.png", bgPos: "calc(100% + 370px) center",
+  },
+  {
+    name: "WHISTLE & BADGE",
+    desc: "Coach or referee instead of playing",
+    para: "Step onto the sideline with purpose. Train as a coach or referee and play a direct role in shaping the next generation of players.",
+    color: "#0a0a0a", Icon: StarIcon,   bg: "/col-4.png", bgPos: "right center",
+  },
 ];
 
 export default function Levels() {
-  const sectionRef    = useRef<HTMLElement>(null);
-  const [inView, setInView]           = useState(false);
+  const sectionRef      = useRef<HTMLElement>(null);
+  const [inView, setInView]             = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
@@ -75,16 +95,18 @@ export default function Levels() {
   return (
     <section ref={sectionRef} className="relative overflow-hidden" style={{ minHeight: "90vh" }}>
 
-      {/* Four band columns — each a full-height container */}
+      {/* Four band columns */}
       <div className="absolute inset-0 flex" style={{ zIndex: 0 }}>
-        {levels.map(({ color, name, desc, Icon, bg, bgPos }, i) => {
-          const isActive    = hoveredIndex === i;
-          const isCollapsed = hoveredIndex !== null && !isActive;
-          const bandWidth   = hoveredIndex === null ? "25%" : isActive ? "70%" : "10%";
+        {levels.map(({ color, name, desc, para, Icon, bg, bgPos }, i) => {
+          const isActive  = hoveredIndex === i;
+          const bandWidth = hoveredIndex === null ? "25%" : isActive ? "70%" : "10%";
 
           const bgImage = bg
             ? `linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 60%, rgba(0,0,0,0.1) 100%), url('${bg}')`
             : undefined;
+
+          // cols 1&2 → paragraph right; cols 3&4 → paragraph left
+          const rowDir = i < 2 ? "row" : "row-reverse";
 
           return (
             <div
@@ -106,31 +128,52 @@ export default function Levels() {
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Icon — always visible */}
-              <div style={{ marginBottom: "16px" }}>
-                <Icon />
-              </div>
+              {/* Bottom row: icon+text  ↔  paragraph, bottom-aligned */}
+              <div style={{ display: "flex", flexDirection: rowDir, alignItems: "flex-end", gap: "32px" }}>
 
-              {/* Text — only visible when this band is hovered */}
-              <div
-                style={{
-                  opacity: isActive ? 1 : 0,
-                  transition: "opacity 0.25s ease",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                <div
-                  className="font-display font-bold uppercase text-white"
-                  style={{ fontSize: "1.5rem", letterSpacing: "0.06em", marginBottom: "8px" }}
-                >
-                  {name}
+                {/* Icon + level text */}
+                <div style={{ flexShrink: 0 }}>
+                  <div style={{ marginBottom: "16px" }}>
+                    <Icon />
+                  </div>
+                  <div
+                    style={{
+                      opacity: isActive ? 1 : 0,
+                      transition: "opacity 0.25s ease",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    <div
+                      className="font-display font-bold uppercase text-white"
+                      style={{ fontSize: "1.5rem", letterSpacing: "0.06em", marginBottom: "8px" }}
+                    >
+                      {name}
+                    </div>
+                    <div
+                      className="font-body text-white/55"
+                      style={{ fontSize: "1rem", lineHeight: 1.5 }}
+                    >
+                      {desc}
+                    </div>
+                  </div>
                 </div>
+
+                {/* Paragraph — fades in with hover */}
                 <div
-                  className="font-body text-white/55"
-                  style={{ fontSize: "1rem", lineHeight: 1.5 }}
+                  style={{
+                    flex: 1,
+                    opacity: isActive ? 1 : 0,
+                    transition: "opacity 0.3s ease 0.05s",
+                  }}
                 >
-                  {desc}
+                  <p
+                    className="font-body text-white/70 leading-relaxed"
+                    style={{ fontSize: "0.9rem", maxWidth: "320px" }}
+                  >
+                    {para}
+                  </p>
                 </div>
+
               </div>
             </div>
           );
