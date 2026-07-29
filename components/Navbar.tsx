@@ -6,57 +6,72 @@ export default function Navbar() {
       className="absolute top-0 left-0 right-0 z-50"
       style={{ animation: "fade-down 0.6s ease-out both" }}
     >
-      {/* Inverted trapezoid pinned at top center */}
+      {/* Soft inverted trapezoid pinned at top center */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-        <div
-          className="bg-black flex items-center justify-center"
-          style={{
-            width: "162px",
-            height: "112px",
-            clipPath: "polygon(0 0, 100% 0, 65% 100%, 35% 100%)",
-            paddingBottom: "14px",
-          }}
-        >
+        <div className="relative" style={{ width: "170px", height: "122px" }}>
+          {/* SVG soft trapezoid shape */}
           <svg
-            width="64"
-            height="64"
-            viewBox="0 0 24 24"
+            width="170"
+            height="122"
+            viewBox="0 0 170 122"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            style={{ filter: "drop-shadow(0 6px 20px rgba(0,0,0,0.22))" }}
           >
-            <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="1.2" />
             <path
-              d="M12 2C12 2 8.5 6.5 8.5 12C8.5 17.5 12 22 12 22"
-              stroke="white"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M12 2C12 2 15.5 6.5 15.5 12C15.5 17.5 12 22 12 22"
-              stroke="white"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M2.5 9H21.5"
-              stroke="white"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M2.5 15H21.5"
-              stroke="white"
-              strokeWidth="1.2"
-              strokeLinecap="round"
+              d="M0,0 H170 C168,32 142,108 122,108 Q85,122 48,108 C28,108 2,32 0,0 Z"
+              fill="white"
             />
           </svg>
+
+          {/* Black circular logo — centered in the white area */}
+          <div
+            className="absolute top-0 left-0 right-0 flex items-center justify-center"
+            style={{ height: "108px" }}
+          >
+            <div className="w-14 h-14 bg-black rounded-full flex items-center justify-center shadow-md">
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="1.4" />
+                <path
+                  d="M12 2C12 2 8.5 6.5 8.5 12C8.5 17.5 12 22 12 22"
+                  stroke="white"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M12 2C12 2 15.5 6.5 15.5 12C15.5 17.5 12 22 12 22"
+                  stroke="white"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M2.5 9H21.5"
+                  stroke="white"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M2.5 15H21.5"
+                  stroke="white"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Transparent nav row — same height as trapezoid */}
+      {/* Transparent nav row */}
       <nav
         className="flex items-center justify-between px-6"
-        style={{ height: "112px" }}
+        style={{ height: "108px" }}
       >
         {/* Left: nav links */}
         <div className="flex items-center gap-0.5">
