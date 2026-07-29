@@ -1,5 +1,5 @@
 export default function Navbar() {
-  const navLinks = ["About Us", "Offer", "Faculties", "Membership"];
+  const navLinks = ["About Us", "Levels", "Partnerships", "Support Us"];
 
   return (
     <header
@@ -106,7 +106,7 @@ export default function Navbar() {
               className="text-sm text-white/70 group-hover:text-white/90 transition-colors font-body tracking-wide"
               style={{ textShadow: "0 1px 8px rgba(0,0,0,0.7)" }}
             >
-              Search Here
+              Join Us Now
             </span>
             <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
               <svg
