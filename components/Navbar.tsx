@@ -9,7 +9,19 @@ export default function Navbar() {
       {/* Inverted trapezoid — straight sides, rounded bottom corners */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
         <div className="relative" style={{ width: "220px", height: "80px" }}>
-          {/* SVG: Q-bezier top corners + cubic-bezier curved sides */}
+          {/*
+            Path breakdown (220×74 viewBox):
+            - M24,0 H196          → flat top edge, starts 24px in from each side
+            - Q220,0 214,20       → top-right rounded corner (Q-bezier around 220,0)
+            - C205,25 180,50 192,65 → right side: cubic bezier curves INWARD (concave)
+            - Q192,74 178,74      → bottom-right rounded corner into the foot
+            - H140                → right foot (flat)
+            - A50,50,0,0,1,80,74  → shallow concave notch: arc r=50 sweeps UP 10px at centre
+            - H42                 → left foot (flat)
+            - Q28,74 28,65        → bottom-left rounded corner
+            - C40,50 15,25 6,20   → left side: mirror cubic bezier (concave inward)
+            - Q0,0 24,0           → top-left rounded corner
+          */}
           <svg
             width="220"
             height="80"
@@ -19,7 +31,7 @@ export default function Navbar() {
             style={{ filter: "drop-shadow(0 5px 18px rgba(0,0,0,0.28))" }}
           >
             <path
-              d="M28,0 H192 Q220,0 214,24 C208,56 174,74 148,74 H72 C46,74 12,56 6,24 Q0,0 28,0 Z"
+              d="M24,0 H196 Q220,0 214,20 C205,25 180,50 192,65 Q192,74 178,74 H140 A50,50,0,0,1,80,74 H42 Q28,74 28,65 C40,50 15,25 6,20 Q0,0 24,0 Z"
               fill="white"
             />
           </svg>
