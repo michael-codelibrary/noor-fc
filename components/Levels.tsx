@@ -99,16 +99,19 @@ export default function Levels() {
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
+              {/* Icon — always visible */}
+              <div style={{ marginBottom: "16px" }}>
+                <Icon />
+              </div>
+
+              {/* Text — only visible when this band is hovered */}
               <div
                 style={{
-                  opacity: isCollapsed ? 0 : 1,
+                  opacity: isActive ? 1 : 0,
                   transition: "opacity 0.25s ease",
                   whiteSpace: "nowrap",
                 }}
               >
-                <div style={{ marginBottom: "16px" }}>
-                  <Icon />
-                </div>
                 <div
                   className="font-display font-bold uppercase text-white"
                   style={{ fontSize: "1rem", letterSpacing: "0.08em", marginBottom: "6px" }}
