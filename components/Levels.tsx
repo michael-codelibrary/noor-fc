@@ -114,13 +114,13 @@ export default function Levels() {
               >
                 <div
                   className="font-display font-bold uppercase text-white"
-                  style={{ fontSize: "1rem", letterSpacing: "0.08em", marginBottom: "6px" }}
+                  style={{ fontSize: "1.5rem", letterSpacing: "0.06em", marginBottom: "8px" }}
                 >
                   {name}
                 </div>
                 <div
                   className="font-body text-white/55"
-                  style={{ fontSize: "0.875rem", lineHeight: 1.4 }}
+                  style={{ fontSize: "1rem", lineHeight: 1.5 }}
                 >
                   {desc}
                 </div>
