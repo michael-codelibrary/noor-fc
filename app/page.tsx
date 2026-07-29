@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import WhatWeBuilding from "@/components/WhatWeBuilding";
 import VideoSection from "@/components/VideoSection";
+import Levels from "@/components/Levels";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <WhatWeBuilding />
       <VideoSection />
+      <Levels />
     </main>
   );
 }
