@@ -16,11 +16,10 @@ function ShieldIcon() {
 }
 
 export default function WhatWeBuilding() {
-  const sectionRef  = useRef<HTMLElement>(null);
+  const sectionRef   = useRef<HTMLElement>(null);
   const watermarkRef = useRef<HTMLSpanElement>(null);
   const [inView, setInView] = useState(false);
 
-  // IntersectionObserver — fires the headline / paragraph slide-ups once
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -32,76 +31,53 @@ export default function WhatWeBuilding() {
     return () => obs.disconnect();
   }, []);
 
-  // Scroll-driven parallax — watermark translates right→left as section passes viewport
   useEffect(() => {
     const handleScroll = () => {
-      const section  = sectionRef.current;
-      const span     = watermarkRef.current;
+      const section = sectionRef.current;
+      const span    = watermarkRef.current;
       if (!section || !span) return;
-
-      const rect = section.getBoundingClientRect();
-      const vh   = window.innerHeight;
-      const sh   = section.offsetHeight;
-
-      // 0 = section entering at viewport bottom, 1 = section leaving at viewport top
+      const rect    = section.getBoundingClientRect();
+      const vh      = window.innerHeight;
+      const sh      = section.offsetHeight;
       const raw     = (vh - rect.top) / (vh + sh);
       const clamped = Math.max(0, Math.min(1, raw));
-
-      // Map 0→1 to +20vw→-20vw  (40vw total travel)
-      const vw = window.innerWidth / 100;
+      const vw      = window.innerWidth / 100;
       span.style.transform = `translateX(${(0.5 - clamped) * 40 * vw}px)`;
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // set initial position before first scroll
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const marqueeItems = [...stats, ...stats, ...stats, ...stats, ...stats, ...stats];
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative overflow-hidden">
 
-      {/* Background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/wwb-bg.png')" }}
-      />
+      {/* Background */}
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/wwb-bg.png')" }} />
       <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.62)" }} />
 
-      {/* NOOR FC watermark — scroll-parallax, no entrance animation */}
-      <div
-        className="absolute top-0 inset-x-0 pointer-events-none select-none flex justify-center"
-        style={{ zIndex: 1 }}
-      >
+      {/* Watermark */}
+      <div className="absolute top-0 inset-x-0 pointer-events-none select-none flex justify-center" style={{ zIndex: 1 }}>
         <span
           ref={watermarkRef}
           className="font-display font-bold uppercase whitespace-nowrap leading-[0.85]"
-          style={{
-            fontSize: "20vw",
-            color: "rgba(255,255,255,0.05)",
-            letterSpacing: "-0.02em",
-            willChange: "transform",
-          }}
+          style={{ fontSize: "20vw", color: "rgba(255,255,255,0.05)", letterSpacing: "-0.02em", willChange: "transform" }}
         >
           NOOR FC
         </span>
       </div>
 
-      {/* Main three-column content */}
-      <div
-        className="relative flex items-stretch"
-        style={{ minHeight: "90vh", zIndex: 10 }}
-      >
-        {/* Left: headline — slide up on inView */}
-        <div
-          className="flex flex-col justify-center shrink-0"
-          style={{ width: "34%", paddingLeft: "120px" }}
-        >
+      {/* Main content — three column on desktop, stacked on mobile */}
+      <div className="relative flex flex-col lg:flex-row items-stretch" style={{ minHeight: "90vh", zIndex: 10 }}>
+
+        {/* Headline */}
+        <div className="flex flex-col justify-center shrink-0 px-6 pt-24 pb-4 lg:pt-0 lg:pb-0 lg:pl-[120px] lg:pr-0 w-full lg:w-[34%]">
           <h2
             className="font-display font-bold uppercase text-white leading-[0.88] tracking-tight"
             style={{
-              fontSize: "clamp(3rem, 5.5vw, 5.5rem)",
+              fontSize: "clamp(2.8rem, 5.5vw, 5.5rem)",
               opacity: inView ? undefined : 0,
               animation: inView ? "fade-up 0.9s ease-out 0.3s both" : "none",
             }}
@@ -114,8 +90,8 @@ export default function WhatWeBuilding() {
           </h2>
         </div>
 
-        {/* Center: player photo */}
-        <div className="flex-1 relative flex items-end justify-center" style={{ zIndex: 20 }}>
+        {/* Player — desktop only */}
+        <div className="hidden lg:flex flex-1 relative items-end justify-center" style={{ zIndex: 20 }}>
           <img
             src="/player.png"
             alt="Noor FC player"
@@ -124,15 +100,15 @@ export default function WhatWeBuilding() {
           />
         </div>
 
-        {/* Right: body text — staggered slide up */}
+        {/* Body text */}
         <div
-          className="flex flex-col justify-center gap-5 shrink-0"
-          style={{ width: "32%", paddingRight: "120px", paddingLeft: "36px", zIndex: 10 }}
+          className="flex flex-col justify-center gap-5 shrink-0 px-6 pb-36 lg:pb-0 lg:pr-[120px] lg:pl-9 w-full lg:w-[32%]"
+          style={{ zIndex: 10 }}
         >
           {[
             { text: "Noor FC is a football club for young people who would otherwise be priced out, overlooked, or simply never asked.", delay: "0.5s", dim: false },
-            { text: "We’re open to kids from Noor Homes and kids from the surrounding streets — most from less privileged backgrounds — and there’s no barrier over money, kit, or ability. We run four levels so every player gets a proper game at their own pace, build life skills into the way every session runs, and bring local clubs and the professional game alongside our players.", delay: "0.65s", dim: true },
-            { text: "This is not a profit-making venture. It’s a community being built, and football is how we do it.", delay: "0.8s", dim: true },
+            { text: "We're open to kids from Noor Homes and kids from the surrounding streets — most from less privileged backgrounds — and there's no barrier over money, kit, or ability. We run four levels so every player gets a proper game at their own pace, build life skills into the way every session runs, and bring local clubs and the professional game alongside our players.", delay: "0.65s", dim: true },
+            { text: "This is not a profit-making venture. It's a community being built, and football is how we do it.", delay: "0.8s", dim: true },
           ].map(({ text, delay, dim }) => (
             <p
               key={delay}
@@ -148,7 +124,7 @@ export default function WhatWeBuilding() {
         </div>
       </div>
 
-      {/* Marquee strip — floating 100px from section bottom */}
+      {/* Marquee */}
       <div
         className="absolute left-0 right-0 overflow-hidden"
         style={{

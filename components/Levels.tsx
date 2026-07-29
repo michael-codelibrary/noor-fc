@@ -93,10 +93,10 @@ export default function Levels() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden" style={{ minHeight: "90vh" }}>
+    <section id="levels" ref={sectionRef} className="relative overflow-hidden" style={{ minHeight: "90vh" }}>
 
-      {/* Four band columns */}
-      <div className="absolute inset-0 flex" style={{ zIndex: 0 }}>
+      {/* Four band columns — desktop only */}
+      <div className="absolute inset-0 hidden lg:flex" style={{ zIndex: 0 }}>
         {levels.map(({ color, name, desc, para, Icon, bg, bgPos }, i) => {
           const isActive  = hoveredIndex === i;
           const bandWidth = hoveredIndex === null ? "25%" : isActive ? "70%" : "10%";
@@ -179,9 +179,9 @@ export default function Levels() {
         })}
       </div>
 
-      {/* Headline + paragraphs — float above the bands */}
+      {/* Headline + paragraphs — desktop only */}
       <div
-        className="relative flex items-start"
+        className="relative hidden lg:flex items-start"
         style={{ paddingTop: "96px", paddingLeft: "120px", paddingRight: "120px", zIndex: 10 }}
       >
         <h2
@@ -224,6 +224,60 @@ export default function Levels() {
             You get placed, not judged — and you can move between groups whenever you like.
           </p>
         </div>
+      </div>
+
+      {/* Mobile layout — stacked cards */}
+      <div className="lg:hidden flex flex-col bg-zinc-950">
+        <div className="px-6 pt-24 pb-8">
+          <h2
+            className="font-display font-bold uppercase text-white leading-[0.88] tracking-tight"
+            style={{
+              fontSize: "clamp(2.8rem, 10vw, 4rem)",
+              opacity: inView ? undefined : 0,
+              animation: inView ? "fade-up 0.9s ease-out 0.2s both" : "none",
+            }}
+          >
+            THERE&rsquo;S NO<br />TRIAL YOU<br />CAN FAIL
+          </h2>
+          <p
+            className="font-body text-white/70 leading-relaxed mt-6"
+            style={{
+              opacity: inView ? undefined : 0,
+              animation: inView ? "fade-up 0.9s ease-out 0.4s both" : "none",
+            }}
+          >
+            No trials. No cuts. Nobody released. Everyone gets minutes, every week.
+            It&rsquo;s free to start — beginners and borrowed boots are welcome.
+          </p>
+        </div>
+
+        {levels.map(({ name, desc, para, Icon, bg, bgPos }, i) => (
+          <div key={i} className="relative overflow-hidden" style={{ minHeight: "300px" }}>
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.28) 100%), url('${bg}')`,
+                backgroundSize: "cover",
+                backgroundPosition: bgPos,
+              }}
+            />
+            <div className="relative flex flex-col justify-end px-6 pb-8 pt-16" style={{ minHeight: "300px" }}>
+              <div style={{ marginBottom: "14px" }}><Icon /></div>
+              <div
+                className="font-display font-bold uppercase text-white"
+                style={{ fontSize: "1.3rem", letterSpacing: "0.06em", marginBottom: "6px" }}
+              >
+                {name}
+              </div>
+              <div className="font-body text-white/55" style={{ fontSize: "0.9rem", lineHeight: 1.5, marginBottom: "12px" }}>
+                {desc}
+              </div>
+              <p className="font-body text-white/70 leading-relaxed" style={{ maxWidth: "400px" }}>
+                {para}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
 
     </section>
