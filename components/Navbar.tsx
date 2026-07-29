@@ -70,7 +70,7 @@ export default function Navbar() {
 
       {/* Transparent nav row */}
       <nav
-        className="flex items-center justify-between px-6"
+        className="flex items-center justify-between px-[120px]"
         style={{ height: "108px" }}
       >
         {/* Left: nav links */}

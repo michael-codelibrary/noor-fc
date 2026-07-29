@@ -27,30 +27,25 @@ export default function Hero() {
 
       {/* Hero content */}
       <div className="relative z-10 flex h-full flex-col justify-end">
-        <div className="flex items-end justify-between px-10 pb-14 gap-8">
+        <div className="flex items-end justify-between px-[120px] pb-14 gap-8">
           {/* Left: text block */}
           <div
             className="max-w-xl"
             style={{ animation: "fade-up 0.75s ease-out 0.25s both" }}
           >
-            <div className="flex items-center gap-2.5 mb-5">
-              <div className="w-1.5 h-1.5 rounded-full bg-white/50" />
-              <span className="text-white/55 text-xs tracking-[0.2em] uppercase font-body">
-                Step Into The World Of Champions
-              </span>
-            </div>
-
-            <h1 className="font-display font-bold uppercase leading-[0.88] text-white mb-7 tracking-tight"
+            <h1
+              className="font-display font-bold uppercase leading-[0.88] text-white mb-7 tracking-tight"
               style={{ fontSize: "clamp(4rem, 7vw, 6rem)" }}
             >
-              Master Your
+              Everyone gets
               <br />
-              Football Game
+              to play
             </h1>
 
-            <p className="text-white/55 text-sm leading-relaxed max-w-[300px] font-body font-light">
-              Sharpen Your Skills, Boost Your Fitness, And Learn Winning
-              Strategies Through Professional, Guided Training Sessions.
+            <p className="text-white/60 text-sm leading-relaxed max-w-[320px] font-body font-light">
+              Noor FC is a not-for-profit community football club, open to
+              anyone local who wants a game. No trials. No cuts. No cost to
+              start.
             </p>
           </div>
 
