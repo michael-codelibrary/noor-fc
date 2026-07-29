@@ -51,8 +51,8 @@ function StarIcon() {
 
 const levels = [
   { name: "FIRST TOUCH",     desc: "Never played, or not for years",      color: "#484848", Icon: TouchIcon,  bg: "/col-1.png", bgPos: "left center" },
-  { name: "DEVELOPMENT",     desc: "Plays a bit, wants to get better",    color: "#2e2e2e", Icon: ArrowIcon,  bg: "/col-2.png", bgPos: "35% center" },
-  { name: "MATCH SQUAD",     desc: "Competitive league football",          color: "#1a1a1a", Icon: ShieldIcon, bg: "/col-3.png", bgPos: "right center" },
+  { name: "DEVELOPMENT",     desc: "Plays a bit, wants to get better",    color: "#2e2e2e", Icon: ArrowIcon,  bg: "/col-2.png", bgPos: "calc(35% + 120px) center" },
+  { name: "MATCH SQUAD",     desc: "Competitive league football",          color: "#1a1a1a", Icon: ShieldIcon, bg: "/col-3.png", bgPos: "calc(100% + 120px) center" },
   { name: "WHISTLE & BADGE", desc: "Coach or referee instead of playing", color: "#0a0a0a", Icon: StarIcon,   bg: "/col-4.png", bgPos: "right center" },
 ];
 
