@@ -43,7 +43,7 @@ export default function Navbar() {
         <img
           src="/noor-fc-logo.png"
           alt="Noor FC"
-          style={{ height: "276px", width: "auto", display: "block", filter: "drop-shadow(0 8px 32px rgba(0,0,0,0.6))" }}
+          style={{ height: "184px", width: "auto", display: "block", filter: "drop-shadow(0 6px 24px rgba(0,0,0,0.6))" }}
         />
       </div>
 
