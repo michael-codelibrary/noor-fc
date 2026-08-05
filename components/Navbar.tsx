@@ -38,30 +38,13 @@ export default function Navbar() {
         transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
-      {/* Trapezoid logo — desktop only */}
+      {/* Logo badge — desktop only */}
       <div className="hidden lg:block absolute top-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-        <div className="relative" style={{ width: "220px", height: "80px" }}>
-          <svg
-            width="220" height="80" viewBox="0 0 220 80" fill="none"
-            style={{ filter: "drop-shadow(0 5px 18px rgba(0,0,0,0.28))" }}
-          >
-            <path
-              d="M24,0 H196 Q220,0 214,20 C205,25 180,50 192,65 Q192,74 178,74 H140 A50,50,0,0,1,80,74 H42 Q28,74 28,65 C40,50 15,25 6,20 Q0,0 24,0 Z"
-              fill="white"
-            />
-          </svg>
-          <div className="absolute top-0 left-0 right-0 flex items-center justify-center" style={{ height: "74px" }}>
-            <div className="w-11 h-11 bg-black rounded-full flex items-center justify-center shadow-md">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="1.4" />
-                <path d="M12 2C12 2 8.5 6.5 8.5 12C8.5 17.5 12 22 12 22" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
-                <path d="M12 2C12 2 15.5 6.5 15.5 12C15.5 17.5 12 22 12 22" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
-                <path d="M2.5 9H21.5" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
-                <path d="M2.5 15H21.5" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
-              </svg>
-            </div>
-          </div>
-        </div>
+        <img
+          src="/noor-fc-logo.png"
+          alt="Noor FC"
+          style={{ height: "92px", width: "auto", display: "block", filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.55))" }}
+        />
       </div>
 
       {/* Nav row */}

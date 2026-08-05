@@ -1,9 +1,3 @@
-const subscriptionFeatures = [
-  "20+ Training Sessions",
-  "Access To Pro Fields",
-  "Performance Tracking",
-];
-
 export default function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-zinc-950">
@@ -42,34 +36,6 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* Right: subscription card — hidden on mobile */}
-          <div
-            className="hidden md:block bg-white rounded-2xl p-6 shrink-0 min-w-[268px]"
-            style={{ animation: "fade-in 0.8s ease-out 0.55s both" }}
-          >
-            <p className="text-[10px] text-zinc-400 uppercase tracking-[0.18em] font-body mb-5">
-              Subscription
-            </p>
-
-            <div className="flex items-start justify-between gap-5">
-              <div>
-                <p className="text-[11px] text-zinc-400 font-body mb-1">Monthly</p>
-                <div className="flex items-start leading-none">
-                  <span className="text-zinc-800 font-display font-bold text-5xl">$99</span>
-                </div>
-                <p className="text-[11px] text-zinc-400 font-body mt-1">/ Month</p>
-              </div>
-
-              <ul className="space-y-2.5 pt-0.5">
-                {subscriptionFeatures.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 text-[12px] text-zinc-600 font-body">
-                    <span className="w-1 h-1 rounded-full bg-zinc-400 shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
     </section>
