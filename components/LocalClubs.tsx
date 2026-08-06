@@ -3,41 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 
 const clubs = [
-  { name: "Millwall FC",        abbr: "MFC",  color: "#1c3564" },
-  { name: "Leyton Orient",      abbr: "LO",   color: "#D4A800" },
-  { name: "Charlton Athletic",  abbr: "CAFC", color: "#cc2200" },
-  { name: "AFC Wimbledon",      abbr: "AFCW", color: "#003087" },
-  { name: "Dulwich Hamlet",     abbr: "DH",   color: "#1a1a1a" },
-  { name: "Barnet FC",          abbr: "BFC",  color: "#D4A800" },
-  { name: "Bromley FC",         abbr: "BFC",  color: "#1c3564" },
-  { name: "Cray Wanderers",     abbr: "CW",   color: "#1a1a1a" },
-  { name: "Corinthian-Casuals", abbr: "CC",   color: "#5c3a1e" },
-  { name: "Clapton FC",         abbr: "CFC",  color: "#cc2200" },
-  { name: "Tooting & Mitcham",  abbr: "T&M",  color: "#1d6b35" },
-  { name: "Wealdstone FC",      abbr: "WFC",  color: "#1a1a1a" },
+  { name: "Arsenal FC",        src: "/clubs/arsenal.png"        },
+  { name: "Brentford FC",      src: "/clubs/brentford.svg"      },
+  { name: "Chelsea FC",        src: "/clubs/chelsea.webp"       },
+  { name: "Crystal Palace FC", src: "/clubs/crystal-palace.svg" },
+  { name: "Fulham FC",         src: "/clubs/fulham.svg"         },
+  { name: "Tottenham Hotspur", src: "/clubs/tottenham.webp"     },
+  { name: "West Ham United",   src: "/clubs/west-ham.webp"      },
 ];
-
-function ShieldBadge({ abbr, color }: { abbr: string; color: string }) {
-  return (
-    <svg viewBox="0 0 80 92" width="128" height="148" aria-hidden="true">
-      <path
-        d="M40 3 L77 17 L77 50 C77 70 61 84 40 89 C19 84 3 70 3 50 L3 17 Z"
-        fill={color}
-      />
-      <text
-        x="40" y="58"
-        textAnchor="middle"
-        fill="white"
-        fontWeight="800"
-        fontSize={abbr.length > 3 ? "11" : "13"}
-        fontFamily="Arial, sans-serif"
-        letterSpacing="0.5"
-      >
-        {abbr}
-      </text>
-    </svg>
-  );
-}
 
 export default function LocalClubs() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -63,11 +36,11 @@ export default function LocalClubs() {
       className="bg-white flex flex-col overflow-hidden"
       style={{ minHeight: "100vh" }}
     >
-      {/* Carousel — fills upper portion */}
+      {/* Carousel — upper portion */}
       <div
-        className="flex-1 flex items-center overflow-hidden"
+        className="flex items-center overflow-hidden"
         style={{
-          minHeight: "320px",
+          height: "280px",
           maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
           WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
         }}
@@ -79,23 +52,21 @@ export default function LocalClubs() {
           {carouselItems.map((club, i) => (
             <div
               key={i}
-              className="flex flex-col items-center shrink-0"
-              style={{ paddingLeft: "80px", paddingRight: "80px" }}
+              className="flex items-center justify-center shrink-0"
+              style={{ paddingLeft: "64px", paddingRight: "64px" }}
             >
-              <ShieldBadge abbr={club.abbr} color={club.color} />
-              <span
-                className="font-body font-semibold text-black/50 mt-3 whitespace-nowrap"
-                style={{ fontSize: "1rem", letterSpacing: "0.06em", textTransform: "uppercase" }}
-              >
-                {club.name}
-              </span>
+              <img
+                src={club.src}
+                alt={club.name}
+                style={{ height: "148px", width: "auto", maxWidth: "148px", objectFit: "contain" }}
+              />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Text content — lower portion */}
-      <div className="flex flex-col items-center text-center px-6 lg:px-[120px] pb-20 pt-10">
+      {/* Text content — lower portion, tighter gap */}
+      <div className="flex flex-col items-center text-center px-6 lg:px-[120px] pb-20 pt-6">
         <h2
           className="font-display font-bold uppercase leading-[0.88] tracking-tight text-black mb-7"
           style={{
