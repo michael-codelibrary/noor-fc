@@ -54,25 +54,25 @@ const levels = [
     name: "FIRST TOUCH",
     desc: "Never played, or not for years",
     para: "No experience needed. Show up once and we'll take care of the rest — there's a place for everyone from the very first session.",
-    color: "#484848", Icon: TouchIcon,  bg: "/col-1.png", bgPos: "left center",
+    color: "#484848", Icon: TouchIcon,  bg: "/col-1.png", bgPos: "15% center",
   },
   {
     name: "DEVELOPMENT",
     desc: "Plays a bit, wants to get better",
     para: "Regular sessions focused on building real skills. You'll train with coaches and improve week by week in a supportive environment.",
-    color: "#2e2e2e", Icon: ArrowIcon,  bg: "/col-2.png", bgPos: "calc(35% + 120px) center",
+    color: "#2e2e2e", Icon: ArrowIcon,  bg: "/col-2.png", bgPos: "40% center",
   },
   {
     name: "MATCH SQUAD",
     desc: "Competitive league football",
     para: "Competitive fixtures every week. Represent the club, play to win, and push your game to the next level alongside serious teammates.",
-    color: "#1a1a1a", Icon: ShieldIcon, bg: "/col-3.png", bgPos: "calc(100% + 370px) center",
+    color: "#1a1a1a", Icon: ShieldIcon, bg: "/col-3.png", bgPos: "55% center",
   },
   {
     name: "WHISTLE & BADGE",
     desc: "Coach or referee instead of playing",
     para: "Step onto the sideline with purpose. Train as a coach or referee and play a direct role in shaping the next generation of players.",
-    color: "#0a0a0a", Icon: StarIcon,   bg: "/col-4.png", bgPos: "right center",
+    color: "#0a0a0a", Icon: StarIcon,   bg: "/col-4.png", bgPos: "65% center",
   },
 ];
 
