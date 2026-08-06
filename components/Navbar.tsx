@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from "react";
 const navLinks = [
   { label: "About Us",     id: "about"  },
   { label: "Levels",       id: "levels" },
-  { label: "Partnerships", id: ""       },
-  { label: "Support Us",   id: ""       },
+  { label: "Partnerships", id: "partnerships" },
+  { label: "Support Us",   id: ""            },
 ];
 
 export default function Navbar() {
@@ -82,7 +82,10 @@ export default function Navbar() {
 
         {/* Right: CTA + hamburger */}
         <div className="flex items-center gap-2">
-          <div className="hidden sm:flex items-center gap-2.5 hover:bg-white/10 transition-colors rounded-full px-4 py-2 cursor-pointer group">
+          <button
+            onClick={() => scrollTo("join")}
+            className="hidden sm:flex items-center gap-2.5 hover:bg-white/10 transition-colors rounded-full px-4 py-2 cursor-pointer group bg-transparent border-none"
+          >
             <span
               className="text-sm text-white/70 group-hover:text-white/90 transition-colors font-body tracking-wide"
               style={{ textShadow: "0 1px 8px rgba(0,0,0,0.7)" }}
@@ -94,7 +97,7 @@ export default function Navbar() {
                 <path d="M2 6H10M10 6L6.5 2.5M10 6L6.5 9.5" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-          </div>
+          </button>
 
           <button
             onClick={() => setMenuOpen(o => !o)}
@@ -123,7 +126,10 @@ export default function Navbar() {
             </button>
           ))}
           <div className="px-6 py-4">
-            <button className="w-full py-3 bg-white text-black font-body text-sm font-medium rounded-xl hover:bg-white/90 transition-colors">
+            <button
+              onClick={() => scrollTo("join")}
+              className="w-full py-3 bg-white text-black font-body text-sm font-medium rounded-xl hover:bg-white/90 transition-colors"
+            >
               Join Us Now
             </button>
           </div>

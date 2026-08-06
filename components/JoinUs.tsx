@@ -60,6 +60,7 @@ export default function JoinUs() {
   return (
     <section
       ref={sectionRef}
+      id="join"
       className="bg-zinc-950 flex flex-col items-center px-6 lg:px-[120px] py-28"
       style={{ minHeight: "100vh" }}
     >

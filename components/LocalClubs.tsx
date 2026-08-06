@@ -33,6 +33,7 @@ export default function LocalClubs() {
   return (
     <section
       ref={sectionRef}
+      id="partnerships"
       className="bg-white flex flex-col items-center justify-center overflow-hidden py-20"
       style={{ minHeight: "100vh" }}
     >
