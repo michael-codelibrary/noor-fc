@@ -33,12 +33,12 @@ export default function LocalClubs() {
   return (
     <section
       ref={sectionRef}
-      className="bg-white flex flex-col overflow-hidden"
+      className="bg-white flex flex-col items-center justify-center overflow-hidden py-20"
       style={{ minHeight: "100vh" }}
     >
       {/* Carousel — upper portion */}
       <div
-        className="flex items-center overflow-hidden"
+        className="w-full flex items-center overflow-hidden"
         style={{
           height: "280px",
           maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
