@@ -19,7 +19,7 @@ const clubs = [
 
 function ShieldBadge({ abbr, color }: { abbr: string; color: string }) {
   return (
-    <svg viewBox="0 0 80 92" width="64" height="74" aria-hidden="true">
+    <svg viewBox="0 0 80 92" width="128" height="148" aria-hidden="true">
       <path
         d="M40 3 L77 17 L77 50 C77 70 61 84 40 89 C19 84 3 70 3 50 L3 17 Z"
         fill={color}
@@ -80,12 +80,12 @@ export default function LocalClubs() {
             <div
               key={i}
               className="flex flex-col items-center shrink-0"
-              style={{ paddingLeft: "56px", paddingRight: "56px" }}
+              style={{ paddingLeft: "80px", paddingRight: "80px" }}
             >
               <ShieldBadge abbr={club.abbr} color={club.color} />
               <span
                 className="font-body font-semibold text-black/50 mt-3 whitespace-nowrap"
-                style={{ fontSize: "0.68rem", letterSpacing: "0.06em", textTransform: "uppercase" }}
+                style={{ fontSize: "1rem", letterSpacing: "0.06em", textTransform: "uppercase" }}
               >
                 {club.name}
               </span>
