@@ -138,13 +138,13 @@ export default function JoinUs() {
 
           {/* Level */}
           <Field id="level" label="Which level interests you?">
-            <select id="level" required defaultValue="" style={{ ...inputBase, cursor: "pointer", appearance: "none" }}>
-              <option value="" disabled>Choose a level</option>
-              <option value="first-touch">First Touch — never played, or not for years</option>
-              <option value="development">Development — plays a bit, wants to improve</option>
-              <option value="match-squad">Match Squad — competitive league football</option>
-              <option value="whistle-badge">Whistle &amp; Badge — wants to coach or referee</option>
-              <option value="not-sure">Not sure yet</option>
+            <select id="level" required defaultValue="" style={{ ...inputBase, cursor: "pointer", appearance: "none", backgroundColor: "#000" }}>
+              <option value="" disabled style={{ background: "#000", color: "rgba(255,255,255,0.4)" }}>Choose a level</option>
+              <option value="first-touch"  style={{ background: "#000", color: "#fff" }}>First Touch — never played, or not for years</option>
+              <option value="development"  style={{ background: "#000", color: "#fff" }}>Development — plays a bit, wants to improve</option>
+              <option value="match-squad"  style={{ background: "#000", color: "#fff" }}>Match Squad — competitive league football</option>
+              <option value="whistle-badge" style={{ background: "#000", color: "#fff" }}>Whistle &amp; Badge — wants to coach or referee</option>
+              <option value="not-sure"     style={{ background: "#000", color: "#fff" }}>Not sure yet</option>
             </select>
           </Field>
 
