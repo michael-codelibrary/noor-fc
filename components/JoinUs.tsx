@@ -61,9 +61,30 @@ export default function JoinUs() {
     <section
       ref={sectionRef}
       id="join"
-      className="bg-zinc-950 flex flex-col items-center px-6 lg:px-[120px] py-28"
+      className="relative overflow-hidden flex flex-col items-center px-6 lg:px-[120px] py-28"
       style={{ minHeight: "100vh" }}
     >
+      {/* Background video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
+      >
+        <source src="/join-bg.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark overlay for readability */}
+      <div
+        className="absolute inset-0"
+        style={{ background: "rgba(0,0,0,0.82)", zIndex: 1 }}
+      />
+
+      {/* Content — above video */}
+      <div className="relative w-full flex flex-col items-center" style={{ zIndex: 2 }}>
+
       {/* Headline */}
       <div
         className="text-center mb-14 w-full"
@@ -179,6 +200,7 @@ export default function JoinUs() {
           </button>
         </form>
       )}
+      </div>{/* end content wrapper */}
     </section>
   );
 }
