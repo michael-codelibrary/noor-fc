@@ -67,7 +67,7 @@ export default function LocalClubs() {
       </div>
 
       {/* Text content — lower portion, tighter gap */}
-      <div className="flex flex-col items-center text-center px-6 lg:px-[120px] pb-20 pt-6">
+      <div className="flex flex-col items-center text-center px-6 md:px-12 lg:px-[120px] pb-20 pt-6">
         <h2
           className="font-display font-bold uppercase leading-[0.88] tracking-tight text-black mb-7"
           style={{

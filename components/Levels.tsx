@@ -228,7 +228,7 @@ export default function Levels() {
 
       {/* Mobile layout — stacked cards */}
       <div className="lg:hidden flex flex-col bg-zinc-950">
-        <div className="px-6 pt-24 pb-8">
+        <div className="px-6 md:px-12 pt-24 pb-8">
           <h2
             className="font-display font-bold uppercase text-white leading-[0.88] tracking-tight"
             style={{

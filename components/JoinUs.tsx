@@ -61,7 +61,7 @@ export default function JoinUs() {
     <section
       ref={sectionRef}
       id="join"
-      className="relative overflow-hidden flex flex-col items-center px-6 lg:px-[120px] py-28"
+      className="relative overflow-hidden flex flex-col items-center px-6 md:px-16 lg:px-[120px] py-28"
       style={{ minHeight: "100vh" }}
     >
       {/* Background video */}

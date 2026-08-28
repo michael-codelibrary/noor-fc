@@ -15,7 +15,7 @@ export default function Hero() {
       {/* Hero content */}
       <div className="relative z-10 flex h-full flex-col justify-end">
         <div
-          className="flex items-end justify-between px-6 lg:px-[120px] pb-14 gap-8"
+          className="flex items-end justify-between px-6 md:px-12 lg:px-[120px] pb-14 gap-8"
           style={{ animation: "fade-up 0.75s ease-out 0.25s both" }}
         >
           {/* Left: text */}

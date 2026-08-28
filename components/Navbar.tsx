@@ -38,6 +38,16 @@ export default function Navbar() {
         transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
+      {/* Gradient backdrop — black at top, fades to transparent */}
+      <div
+        className="absolute inset-x-0 top-0 pointer-events-none"
+        style={{
+          height: "300px",
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 35%, transparent 100%)",
+          zIndex: -1,
+        }}
+      />
+
       {/* Logo badge — desktop only */}
       <div className="hidden lg:block absolute top-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
         <img
@@ -55,7 +65,7 @@ export default function Navbar() {
       </div>
 
       {/* Nav row */}
-      <nav className="flex items-center justify-between px-6 lg:px-[120px]" style={{ height: "74px" }}>
+      <nav className="flex items-center justify-between px-6 md:px-12 lg:px-[120px]" style={{ height: "80px" }}>
 
         {/* Desktop: nav links */}
         <div className="hidden lg:flex items-center gap-0.5">
@@ -63,7 +73,7 @@ export default function Navbar() {
             <button
               key={label}
               onClick={() => scrollTo(id)}
-              className="px-4 py-2 text-sm text-white/80 hover:text-white rounded-xl hover:bg-white/10 transition-all duration-200 font-body tracking-wide bg-transparent cursor-pointer"
+              className="px-4 py-2.5 text-[16px] text-white/85 hover:text-white rounded-xl hover:bg-white/10 transition-all duration-200 font-body tracking-wide bg-transparent cursor-pointer"
               style={{ border: "none", textShadow: "0 1px 8px rgba(0,0,0,0.7)" }}
             >
               {label}
@@ -87,7 +97,7 @@ export default function Navbar() {
             className="hidden sm:flex items-center gap-2.5 hover:bg-white/10 transition-colors rounded-full px-4 py-2 cursor-pointer group bg-transparent border-none"
           >
             <span
-              className="text-sm text-white/70 group-hover:text-white/90 transition-colors font-body tracking-wide"
+              className="text-[16px] text-white/80 group-hover:text-white/95 transition-colors font-body tracking-wide"
               style={{ textShadow: "0 1px 8px rgba(0,0,0,0.7)" }}
             >
               Join Us Now

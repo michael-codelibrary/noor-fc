@@ -14,7 +14,7 @@ const scrollTo = (id: string) => {
 export default function Footer() {
   return (
     <footer
-      className="bg-zinc-950 px-6 lg:px-[120px] pt-12 pb-8"
+      className="bg-zinc-950 px-6 md:px-12 lg:px-[120px] pt-12 pb-8"
       style={{ borderTop: "1px solid rgba(29,107,53,0.35)" }}
     >
       {/* Main row */}

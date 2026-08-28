@@ -73,7 +73,7 @@ export default function WhatWeBuilding() {
       <div className="relative flex flex-col lg:flex-row items-stretch" style={{ minHeight: "90vh", zIndex: 10 }}>
 
         {/* Headline */}
-        <div className="flex flex-col justify-center shrink-0 px-6 pt-24 pb-4 lg:pt-0 lg:pb-0 lg:pl-[120px] lg:pr-0 w-full lg:w-[34%]">
+        <div className="flex flex-col justify-center shrink-0 px-6 md:px-12 pt-24 pb-4 lg:pt-0 lg:pb-0 lg:pl-[120px] lg:pr-0 w-full lg:w-[34%]">
           <h2
             className="font-display font-bold uppercase text-white leading-[0.88] tracking-tight"
             style={{
@@ -102,7 +102,7 @@ export default function WhatWeBuilding() {
 
         {/* Body text */}
         <div
-          className="flex flex-col justify-center gap-5 shrink-0 px-6 pb-36 lg:pb-0 lg:pr-[120px] lg:pl-9 w-full lg:w-[32%]"
+          className="flex flex-col justify-center gap-5 shrink-0 px-6 md:px-12 pb-36 lg:pb-0 lg:pr-[120px] lg:pl-9 w-full lg:w-[32%]"
           style={{ zIndex: 10 }}
         >
           {[

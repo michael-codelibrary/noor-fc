@@ -25,7 +25,7 @@ export default function LifeSkills() {
     >
       {/* Text — bottom on mobile, left on desktop */}
       <div
-        className="order-2 lg:order-1 flex flex-col justify-center shrink-0 w-full lg:w-[55%] px-6 py-14 lg:pl-[120px] lg:pr-20 lg:py-0"
+        className="order-2 lg:order-1 flex flex-col justify-center shrink-0 w-full lg:w-[55%] px-6 md:px-12 py-14 lg:pl-[120px] lg:pr-20 lg:py-0"
         style={{
           opacity: inView ? 1 : 0,
           transform: inView ? "translateX(0)" : "translateX(-28px)",
