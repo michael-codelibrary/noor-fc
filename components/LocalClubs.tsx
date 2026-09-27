@@ -39,7 +39,7 @@ export default function LocalClubs() {
     >
       {/* Carousel — upper portion */}
       <div
-        className="w-full flex items-center overflow-hidden"
+        className="hidden w-full flex items-center overflow-hidden"
         style={{
           height: "280px",
           maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
