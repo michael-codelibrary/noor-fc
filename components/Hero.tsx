@@ -24,9 +24,9 @@ export default function Hero() {
               className="font-display font-bold uppercase leading-[0.88] text-white mb-7 tracking-tight"
               style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}
             >
-              Everyone gets
+              Football,
               <br />
-              to play
+              fully inclusive
             </h1>
 
             <p className="text-white/60 text-base leading-relaxed max-w-[320px] font-body font-light">
