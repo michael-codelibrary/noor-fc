@@ -5,6 +5,7 @@ import VideoSection from "@/components/VideoSection";
 import Levels from "@/components/Levels";
 import LifeSkills from "@/components/LifeSkills";
 import LocalClubs from "@/components/LocalClubs";
+import FAQ from "@/components/FAQ";
 import JoinUs from "@/components/JoinUs";
 import Footer from "@/components/Footer";
 
@@ -19,6 +20,7 @@ export default function Home() {
         <Levels />
         <LifeSkills />
         <LocalClubs />
+        <FAQ />
         <JoinUs />
       </main>
       <Footer />
