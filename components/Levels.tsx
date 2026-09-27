@@ -60,19 +60,19 @@ const levels = [
     name: "DEVELOPMENT",
     desc: "Plays a bit, wants to get better",
     para: "Regular sessions focused on building real skills. You'll train with coaches and improve week by week in a supportive environment.",
-    color: "#2e2e2e", Icon: ArrowIcon,  bg: "/col-2.png", bgPos: "40% center",
+    color: "#2e2e2e", Icon: ArrowIcon,  bg: "/col-2.png", bgPos: "45% center",
   },
   {
     name: "MATCH SQUAD",
     desc: "Competitive league football",
     para: "Competitive fixtures every week. Represent the club, play to win, and push your game to the next level alongside serious teammates.",
-    color: "#1a1a1a", Icon: ShieldIcon, bg: "/col-3.png", bgPos: "55% center",
+    color: "#1a1a1a", Icon: ShieldIcon, bg: "/col-3.png", bgPos: "65% center",
   },
   {
     name: "WHISTLE & BADGE",
     desc: "Coach or referee instead of playing",
     para: "Step onto the sideline with purpose. Train as a coach or referee and play a direct role in shaping the next generation of players.",
-    color: "#0a0a0a", Icon: StarIcon,   bg: "/col-4.png", bgPos: "65% center",
+    color: "#0a0a0a", Icon: StarIcon,   bg: "/col-4.png", bgPos: "70% center",
   },
 ];
 
@@ -93,140 +93,142 @@ export default function Levels() {
   }, []);
 
   return (
-    <section id="levels" ref={sectionRef} className="relative overflow-hidden" style={{ minHeight: "90vh" }}>
+    <section id="levels" ref={sectionRef} className="relative overflow-hidden bg-zinc-950">
 
-      {/* Four band columns — desktop only */}
-      <div className="absolute inset-0 hidden lg:flex" style={{ zIndex: 0 }}>
-        {levels.map(({ color, name, desc, para, Icon, bg, bgPos }, i) => {
-          const isActive  = hoveredIndex === i;
-          const bandWidth = hoveredIndex === null ? "25%" : isActive ? "70%" : "10%";
+      {/* DESKTOP — flex col: header above, accordion bands below */}
+      <div className="hidden lg:flex flex-col" style={{ minHeight: "100vh" }}>
 
-          const bgImage = bg
-            ? `linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 60%, rgba(0,0,0,0.1) 100%), url('${bg}')`
-            : undefined;
+        {/* Header — sits above the images, not overlaying them */}
+        <div
+          className="flex items-start shrink-0"
+          style={{ paddingTop: "96px", paddingLeft: "120px", paddingRight: "120px", paddingBottom: "56px" }}
+        >
+          <h2
+            className="font-display font-bold uppercase text-white leading-[0.88] tracking-tight shrink-0"
+            style={{
+              width: "50%",
+              fontSize: "clamp(3rem, 5.5vw, 5.5rem)",
+              letterSpacing: "-0.02em",
+              opacity: inView ? undefined : 0,
+              animation: inView ? "fade-up 0.9s ease-out 0.2s both" : "none",
+            }}
+          >
+            THERE&rsquo;S NO
+            <br />
+            TRIAL YOU
+            <br />
+            CAN FAIL
+          </h2>
 
-          // cols 1&2 → paragraph right; cols 3&4 → paragraph left
-          const rowDir = i < 2 ? "row" : "row-reverse";
-
-          return (
-            <div
-              key={i}
-              className="flex flex-col justify-end overflow-hidden"
+          <div style={{ width: "50%", paddingLeft: "48px" }}>
+            <p
+              className="font-body text-white/80 leading-relaxed"
               style={{
-                width: bandWidth,
-                flexShrink: 0,
-                backgroundColor: color,
-                backgroundImage: bgImage,
-                backgroundSize: "cover",
-                backgroundPosition: bgPos,
-                transition: "width 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                paddingBottom: "52px",
-                paddingLeft:  i === 0 ? "120px" : "28px",
-                paddingRight: i === levels.length - 1 ? "120px" : "28px",
-                cursor: "default",
+                opacity: inView ? undefined : 0,
+                animation: inView ? "fade-up 0.9s ease-out 0.4s both" : "none",
               }}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Bottom row: icon+text  ↔  paragraph, bottom-aligned */}
-              <div style={{ display: "flex", flexDirection: rowDir, alignItems: "flex-end", justifyContent: "space-between" }}>
+              No trials. No cuts. Nobody released. Everyone gets minutes, every week.
+              It&rsquo;s free to start, with no subs for the first month — beginners
+              and borrowed boots are welcome.
+            </p>
+            <p
+              className="font-body text-white/60 leading-relaxed"
+              style={{
+                marginTop: "20px",
+                opacity: inView ? undefined : 0,
+                animation: inView ? "fade-up 0.9s ease-out 0.55s both" : "none",
+              }}
+            >
+              You get placed, not judged — and you can move between groups whenever you like.
+            </p>
+          </div>
+        </div>
 
-                {/* Icon + level text */}
-                <div style={{ flexShrink: 0 }}>
-                  <div style={{ marginBottom: "16px" }}>
-                    <Icon />
+        {/* Accordion bands — fill remaining height */}
+        <div className="flex flex-1">
+          {levels.map(({ color, name, desc, para, Icon, bg, bgPos }, i) => {
+            const isActive  = hoveredIndex === i;
+            const bandWidth = hoveredIndex === null ? "25%" : isActive ? "70%" : "10%";
+
+            const bgImage = bg
+              ? `linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 60%, rgba(0,0,0,0.1) 100%), url('${bg}')`
+              : undefined;
+
+            return (
+              <div
+                key={i}
+                className="flex flex-col justify-end overflow-hidden"
+                style={{
+                  width: bandWidth,
+                  flexShrink: 0,
+                  backgroundColor: color,
+                  backgroundImage: bgImage,
+                  backgroundSize: "cover",
+                  backgroundPosition: bgPos,
+                  transition: "width 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                  paddingBottom: "52px",
+                  paddingLeft: "28px",
+                  paddingRight: "28px",
+                  cursor: "default",
+                }}
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                {/* Bottom row: icon+text left, paragraph right — uniform layout */}
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-end", justifyContent: "space-between" }}>
+
+                  {/* Icon + level text */}
+                  <div style={{ flexShrink: 0 }}>
+                    <div style={{ marginBottom: "16px" }}>
+                      <Icon />
+                    </div>
+                    <div
+                      style={{
+                        opacity: isActive ? 1 : 0,
+                        transition: "opacity 0.25s ease",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      <div
+                        className="font-display font-bold uppercase text-white"
+                        style={{ fontSize: "1.5rem", letterSpacing: "0.06em", marginBottom: "8px" }}
+                      >
+                        {name}
+                      </div>
+                      <div
+                        className="font-body text-white/55"
+                        style={{ fontSize: "1rem", lineHeight: 1.5 }}
+                      >
+                        {desc}
+                      </div>
+                    </div>
                   </div>
+
+                  {/* Paragraph — fades in on hover */}
                   <div
                     style={{
                       opacity: isActive ? 1 : 0,
-                      transition: "opacity 0.25s ease",
-                      whiteSpace: "nowrap",
+                      transition: "opacity 0.3s ease 0.05s",
                     }}
                   >
-                    <div
-                      className="font-display font-bold uppercase text-white"
-                      style={{ fontSize: "1.5rem", letterSpacing: "0.06em", marginBottom: "8px" }}
+                    <p
+                      className="font-body text-white/70 leading-relaxed"
+                      style={{ maxWidth: "320px" }}
                     >
-                      {name}
-                    </div>
-                    <div
-                      className="font-body text-white/55"
-                      style={{ fontSize: "1rem", lineHeight: 1.5 }}
-                    >
-                      {desc}
-                    </div>
+                      {para}
+                    </p>
                   </div>
-                </div>
 
-                {/* Paragraph — fades in with hover */}
-                <div
-                  style={{
-                    opacity: isActive ? 1 : 0,
-                    transition: "opacity 0.3s ease 0.05s",
-                  }}
-                >
-                  <p
-                    className="font-body text-white/70 leading-relaxed"
-                    style={{ maxWidth: "320px" }}
-                  >
-                    {para}
-                  </p>
                 </div>
-
               </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Headline + paragraphs — desktop only */}
-      <div
-        className="relative hidden lg:flex items-start"
-        style={{ paddingTop: "96px", paddingLeft: "120px", paddingRight: "120px", zIndex: 10 }}
-      >
-        <h2
-          className="font-display font-bold uppercase text-white leading-[0.88] tracking-tight shrink-0"
-          style={{
-            width: "50%",
-            fontSize: "clamp(3rem, 5.5vw, 5.5rem)",
-            letterSpacing: "-0.02em",
-            opacity: inView ? undefined : 0,
-            animation: inView ? "fade-up 0.9s ease-out 0.2s both" : "none",
-          }}
-        >
-          THERE&rsquo;S NO
-          <br />
-          TRIAL YOU
-          <br />
-          CAN FAIL
-        </h2>
-
-        <div style={{ width: "50%", paddingLeft: "48px" }}>
-          <p
-            className="font-body text-white/80 leading-relaxed"
-            style={{
-              opacity: inView ? undefined : 0,
-              animation: inView ? "fade-up 0.9s ease-out 0.4s both" : "none",
-            }}
-          >
-            No trials. No cuts. Nobody released. Everyone gets minutes, every week.
-            It&rsquo;s free to start, with no subs for the first month — beginners
-            and borrowed boots are welcome.
-          </p>
-          <p
-            className="font-body text-white/60 leading-relaxed"
-            style={{
-              marginTop: "20px",
-              opacity: inView ? undefined : 0,
-              animation: inView ? "fade-up 0.9s ease-out 0.55s both" : "none",
-            }}
-          >
-            You get placed, not judged — and you can move between groups whenever you like.
-          </p>
+            );
+          })}
         </div>
+
       </div>
 
-      {/* Mobile layout — stacked cards */}
+      {/* MOBILE — stacked cards */}
       <div className="lg:hidden flex flex-col bg-zinc-950">
         <div className="px-6 md:px-12 pt-24 pb-8">
           <h2
