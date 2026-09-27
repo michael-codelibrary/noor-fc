@@ -39,21 +39,35 @@ export default function Testimonials() {
   return (
     <section
       ref={sectionRef}
-      className="px-6 md:px-12 lg:px-[120px] py-28"
-      style={{ backgroundColor: "#1d6b35" }}
+      className="bg-white px-6 md:px-12 lg:px-[120px] py-28"
     >
-      {/* Eyebrow */}
+      {/* Heading block */}
       <div
-        className="font-display font-bold uppercase mb-14"
+        className="mb-16"
         style={{
-          fontSize: "0.72rem",
-          letterSpacing: "0.18em",
-          color: "rgba(255,255,255,0.45)",
           opacity: inView ? undefined : 0,
           animation: inView ? "fade-up 0.9s ease-out 0.1s both" : "none",
         }}
       >
-        Heard on the touchline
+        <div
+          className="font-display font-bold uppercase mb-5"
+          style={{ fontSize: "0.72rem", letterSpacing: "0.18em", color: "#D4A800" }}
+        >
+          Heard on the touchline
+        </div>
+        <h2
+          className="font-display font-bold uppercase text-black leading-[0.88] tracking-tight mb-7"
+          style={{ fontSize: "clamp(2.8rem, 5vw, 5rem)", letterSpacing: "-0.02em" }}
+        >
+          In their<br />own words.
+        </h2>
+        <p
+          className="font-body text-black/55 leading-relaxed"
+          style={{ maxWidth: "480px" }}
+        >
+          From parents on the sideline to players who weren&rsquo;t sure they&rsquo;d fit in —
+          here&rsquo;s what the Noor FC community has to say.
+        </p>
       </div>
 
       {/* 2×2 quote grid */}
@@ -66,25 +80,18 @@ export default function Testimonials() {
               borderLeft: "2px solid #D4A800",
               paddingLeft: "28px",
               opacity: inView ? undefined : 0,
-              animation: inView ? `fade-up 0.9s ease-out ${0.15 + i * 0.1}s both` : "none",
+              animation: inView ? `fade-up 0.9s ease-out ${0.2 + i * 0.1}s both` : "none",
             }}
           >
             <p
               className="font-body leading-relaxed"
-              style={{
-                flex: 1,
-                color: "rgba(255,255,255,0.82)",
-              }}
+              style={{ flex: 1, color: "rgba(0,0,0,0.72)" }}
             >
               &ldquo;{t.quote}&rdquo;
             </p>
             <div
               className="font-display font-bold uppercase mt-6"
-              style={{
-                fontSize: "0.62rem",
-                letterSpacing: "0.2em",
-                color: "#D4A800",
-              }}
+              style={{ fontSize: "0.62rem", letterSpacing: "0.2em", color: "#D4A800" }}
             >
               {t.attribution}
             </div>
